@@ -4,9 +4,9 @@ services:
   db:
     image: postgres:11-alpine
     environment:
-      POSTGRES_DB: wiki
-      POSTGRES_PASSWORD: wikijsrocks
-      POSTGRES_USER: wikijs
+      POSTGRES_DB: ct_workinstruction
+      POSTGRES_PASSWORD: ''
+      POSTGRES_USER: ''
     logging:
       driver: "none"
     restart: unless-stopped
@@ -21,13 +21,12 @@ services:
       DB_TYPE: postgres
       DB_HOST: db
       DB_PORT: 5432
-      DB_USER: wikijs
-      DB_PASS: wikijsrocks
-      DB_NAME: wiki
+      DB_USER: ''
+      DB_PASS: ''
+      DB_NAME: ct_workinstruction
     restart: unless-stopped
     ports:
-      - "80:3000"
-      - "443:3443"
+      - "80:3030"
 
 volumes:
   db-data:

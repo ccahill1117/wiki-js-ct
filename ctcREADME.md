@@ -8,7 +8,6 @@ $ heroku login i
 
 $ node server to start
 
-
 * backing up
 
 $ pg_dump -Fc --no-acl --no-owner ct_workinstruction > ct_workinstruction.sql
@@ -19,3 +18,5 @@ $ heroku pg:backups:restore 'https://hereyougofriend.s3.us-west-2.amazonaws.com/
 
 * Current Issues
 - attachment greater than 5MB
+
+- $chmod 777 data

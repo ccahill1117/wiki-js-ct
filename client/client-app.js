@@ -164,6 +164,10 @@ Vue.component('profile', () => import(/* webpackChunkName: "profile" */ './compo
 Vue.component('register', () => import(/* webpackChunkName: "register" */ './components/register.vue'))
 Vue.component('search-results', () => import(/* webpackPrefetch: true, webpackChunkName: "ui-extra" */ './components/common/search-results.vue'))
 Vue.component('social-sharing', () => import(/* webpackPrefetch: true, webpackChunkName: "ui-extra" */ './components/common/social-sharing.vue'))
+
+Vue.component('checklist', () => import(/* webpackPrefetch: true, webpackChunkName: "ui-extra" */ './components/checklist/checklist.vue'))
+
+
 Vue.component('tags', () => import(/* webpackChunkName: "tags" */ './components/tags.vue'))
 Vue.component('unauthorized', () => import(/* webpackChunkName: "unauthorized" */ './components/unauthorized.vue'))
 Vue.component('v-card-chin', () => import(/* webpackPrefetch: true, webpackChunkName: "ui-extra" */ './components/common/v-card-chin.vue'))
@@ -172,6 +176,7 @@ Vue.component('welcome', () => import(/* webpackChunkName: "welcome" */ './compo
 
 Vue.component('nav-footer', () => import(/* webpackChunkName: "theme" */ './themes/' + siteConfig.theme + '/components/nav-footer.vue'))
 Vue.component('page', () => import(/* webpackChunkName: "theme" */ './themes/' + siteConfig.theme + '/components/page.vue'))
+
 
 let bootstrap = () => {
   // ====================================

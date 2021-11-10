@@ -185,6 +185,11 @@
                   span {{$t('common:page.printFormat')}}
                 v-spacer
 
+            //- ctc work
+            v-card(flat)
+              checklist
+                v-spacer
+
           v-flex.page-col-content(xs12, lg9, xl10)
             v-tooltip(:right='$vuetify.rtl', :left='!$vuetify.rtl', v-if='hasAnyPagePermissions')
               template(v-slot:activator='{ on: onEditActivator }')
