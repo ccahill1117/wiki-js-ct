@@ -1,12 +1,14 @@
 <template>
   <div>
     <div>hihi</div>
-    <v-btn @click='checker'>ok</v-btn>
+    <v-btn @click='fetchProcedures(5)'>ok</v-btn>
   </div>
 </template>
 
 <script>
 import { get, sync } from 'vuex-pathify'
+import listProceduresQuery from 'gql/procedures/procedures-query-list.gql'
+import gql from 'graphql-tag'
 
 
 export default {
@@ -24,17 +26,50 @@ export default {
     }
   },
   methods: {
-    checker() {
+    async createProcedure() {
       console.log('id', this.userId)
-      console.log('email', this.userEmail)
+      console.log('store', this.$store)
       console.log('process')
+    },
+    async FetchProcedureHTTPS() {
+      axios.post("http://localhost:3030/procedures")
+        .then(response => console.log(response));
+    },
 
-    }
+    async fetchProcedures(limit) {
+      this.$store.commit(`loadingStart`, 'comments-edit')
+      this.isBusy = true
+      try {
+        const results = await this.$apollo.query({
+          query: gql`
+            query {
+              procedures {
+                list {
+                  filename
+                  pageId
+                }
+              }
+            }
+          `,
+          fetchPolicy: 'network-only'
+        })
+      } catch (err) {
+        console.warn(err)
+        console.log(results)
+        this.$store.commit('showNotification', {
+          style: 'red',
+          message: err.message,
+          icon: 'alert'
+        })
+      }
+      this.isBusy = false
+      this.$store.commit(`loadingStop`, 'comments-edit')
+    },
 
   },
+
+
   mounted () {
-
-
     /**
      * Center the popup on dual screens
      * http://stackoverflow.com/questions/4068373/center-a-popup-window-on-screen/32261263
@@ -47,6 +82,24 @@ export default {
 
     this.left = ((width / 2) - (this.width / 2)) + dualScreenLeft
     this.top = ((height / 2) - (this.height / 2)) + dualScreenTop
+  },
+  apollo: {
+    procedures: {
+      query: listProceduresQuery,
+      variables() {
+        return {
+          // folderId: this.currentFolderId,
+          kind: 'ALL'
+        }
+      },
+      throttle: 1000,
+      fetchPolicy: 'network-only',
+      update: (data) => data.procedures,
+      watchLoading (isLoading) {
+        this.loading = isLoading
+        this.$store.commit(`loading${isLoading ? 'Start' : 'Stop'}`, 'editor-media-list-refresh')
+      }
+    }
   }
 }
 </script>
