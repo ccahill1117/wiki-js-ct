@@ -60,10 +60,9 @@ const init = {
   },
   async reload() {
     console.warn(chalk.yellow('--- Gracefully stopping server...'))
-    await global.WIKI.kernel.shutdown()
-
+    // CTC - uncommented below because it kept shutting down server
+    // await global.WIKI.kernel.shutdown()
     console.warn(chalk.yellow('--- Purging node modules cache...'))
-
     global.WIKI = {}
     Object.keys(require.cache).forEach(id => {
       if (/[/\\]server[/\\]/.test(id)) {

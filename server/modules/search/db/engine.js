@@ -21,7 +21,7 @@ module.exports = {
    */
   async query(q, opts) {
     const results = await WIKI.models.pages.query()
-      .column('pages.id', 'title', 'description', 'path', 'localeCode as locale')
+      .column('pages.id', 'title', 'description', 'path', 'content', 'localeCode as locale')
       .withGraphJoined('tags') // Adding page tags since they can be used to check resource access permissions
       .modifyGraph('tags', builder => {
         builder.select('tag')
@@ -37,10 +37,12 @@ module.exports = {
         builder.andWhere(builderSub => {
           if (WIKI.config.db.type === 'postgres') {
             builderSub.where('title', 'ILIKE', `%${q}%`)
+            builderSub.orWhere('content', 'ILIKE', `%${q}%`)
             builderSub.orWhere('description', 'ILIKE', `%${q}%`)
             builderSub.orWhere('path', 'ILIKE', `%${q.toLowerCase()}%`)
           } else {
             builderSub.where('title', 'LIKE', `%${q}%`)
+            builderSub.orWhere('content', 'ILIKE', `%${q}%`)
             builderSub.orWhere('description', 'LIKE', `%${q}%`)
             builderSub.orWhere('path', 'LIKE', `%${q.toLowerCase()}%`)
           }

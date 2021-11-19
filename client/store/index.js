@@ -19,6 +19,11 @@ const state = {
     style: 'primary',
     icon: 'cached',
     isActive: false
+  },
+  // ctc
+  procedure: {
+    content: '',
+    isActive: false,
   }
 }
 
@@ -29,10 +34,18 @@ export default new Vuex.Store({
   ],
   state,
   getters: {
-    isLoading: state => { return state.loadingStack.length > 0 }
+    isLoading: state => { return state.loadingStack.length > 0 },
+    getProcedureState: state => state.procedure
   },
   mutations: {
     ...make.mutations(state),
+    // ctc
+    updateProcedure (st, opts) {
+      st.procedure = _.defaults(opts, {
+        content: opts.content,
+        isActive: opts.isActive
+      })
+    },
     loadingStart (st, stackName) {
       st.loadingStack = _.union(st.loadingStack, [stackName])
     },
@@ -56,7 +69,8 @@ export default new Vuex.Store({
         message: _.get(err, 'graphQLErrors[0].message', err.message),
         icon: 'alert'
       })
-    }
+    },
+
   },
   actions: { },
   modules: {

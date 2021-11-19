@@ -64,6 +64,7 @@ module.exports = () => {
   // Controllers
   // ----------------------------------------
 
+
   app.get('*', async (req, res) => {
     let packageObj = await fs.readJson(path.join(WIKI.ROOTPATH, 'package.json'))
     res.render('setup', { packageObj })
