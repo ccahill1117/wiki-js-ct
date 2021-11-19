@@ -35,3 +35,4 @@ $ heroku login i
 - scripting from one note
 - creating basic table structure for procedures / procedureSteps
 - beginning work on graphQL to utilize built in auth
+- beginning 
