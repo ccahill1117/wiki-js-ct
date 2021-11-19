@@ -91,6 +91,9 @@
                   )
                   v-icon(:color='$vuetify.theme.dark ? `teal lighten-3` : `teal`', size='20') mdi-tag-multiple
 
+            v-card.mb-5()
+              checklist
+
             v-card.mb-5(v-if='commentsEnabled && commentsPerms.read')
               .pa-5
                 .overline.pb-2.blue-grey--text.d-flex.align-center(:class='$vuetify.theme.dark ? `text--lighten-3` : `text--darken-2`')
@@ -185,10 +188,6 @@
                   span {{$t('common:page.printFormat')}}
                 v-spacer
 
-            //- ctc work
-            v-card(flat)
-              checklist
-                v-spacer
 
           v-flex.page-col-content(xs12, lg9, xl10)
             v-tooltip(:right='$vuetify.rtl', :left='!$vuetify.rtl', v-if='hasAnyPagePermissions')

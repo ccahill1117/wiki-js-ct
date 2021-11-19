@@ -1,0 +1,56 @@
+# ===============================================
+# PROCEDURES
+# ===============================================
+
+extend type Query {
+  procedures: ProcedureQuery
+}
+
+extend type Mutation {
+  procedures: ProcedureMutation
+}
+
+# -----------------------------------------------
+# QUERIES
+# -----------------------------------------------
+
+type ProcedureQuery {
+  list: [ProcedureListItem]! @auth(requires: ["read:comments", "manage:system"]),
+
+  listByPageId(
+    locale: String!
+    path: String!
+  ): [CommentPost]! @auth(requires: ["read:comments", "manage:system"])
+
+}
+
+# -----------------------------------------------
+# MUTATIONS
+# -----------------------------------------------
+
+type ProcedureMutation {
+  createProcedure(
+    id: Int
+    filename: String
+    pageId: Int
+    createdAt: Date
+    updatedAt: Date
+  ): DefaultResponse @auth(requires: ["manage:system", "write:assets"])
+
+}
+
+# -----------------------------------------------
+# TYPES
+# -----------------------------------------------
+
+type ProcedureListItem {
+  id: Int
+  filename: String
+  pageId: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+enum ProcedureKind {
+  ALL
+}

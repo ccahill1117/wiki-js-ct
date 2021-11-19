@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div>hihi</div>
-    <v-btn @click='fetchProcedures(5)'>ok</v-btn>
+    <div>Procedures in Flight</div>
+    <v-btn @click='fetchProcedures()'>ok</v-btn>
+
   </div>
 </template>
 
@@ -22,6 +23,7 @@ export default {
   },
   data () {
     return {
+      procedures: ''
 
     }
   },
@@ -36,7 +38,7 @@ export default {
         .then(response => console.log(response));
     },
 
-    async fetchProcedures(limit) {
+    async fetchProcedures() {
       this.$store.commit(`loadingStart`, 'comments-edit')
       this.isBusy = true
       try {
@@ -53,6 +55,7 @@ export default {
           `,
           fetchPolicy: 'network-only'
         })
+        console.log('results',results.data.procedures.list)
       } catch (err) {
         console.warn(err)
         console.log(results)
@@ -63,7 +66,11 @@ export default {
         })
       }
       this.isBusy = false
-      this.$store.commit(`loadingStop`, 'comments-edit')
+      this.$store.commit('showNotification', {
+          style: 'green',
+          message: 'procedures loaded',
+          icon: 'success'
+        })
     },
 
   },

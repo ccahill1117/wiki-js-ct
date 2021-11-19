@@ -1,0 +1,11 @@
+query {
+  procedures {
+    list {
+      id
+      filename
+      pageId
+      createdAt
+      updatedAt
+    }
+  }
+}
