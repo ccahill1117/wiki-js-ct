@@ -1,7 +1,9 @@
 <template>
   <div class="procedure-container">
     <div>Procedures in Flight</div>
-    <div v-bind='getProcedureState'>{{getProcedureState}}</div>
+    <li v-for="item in getProcedureState.content" :key="item">
+      {{ item }}
+    </li>
 
 
   </div>
@@ -29,6 +31,7 @@ export default {
 
   data () {
     return {
+
     }
   },
   methods: {
