@@ -1,10 +1,8 @@
 <template>
   <div class="checklist-container">
     <div>Procedure Options</div>
-    <v-btn @click='fetchProcedures()'>FetchProcedures</v-btn>
-
+    <v-btn @click='fetchProcedures()'>Fetch Procedures (gql)</v-btn>
     <v-btn @click='startProcedure()'>Start Procedure</v-btn>
-
     <v-btn @click='check()'>checker</v-btn>
 
   </div>
@@ -28,7 +26,7 @@ export default {
   },
   data () {
     return {
-      procedures: ''
+      procedureList: ''
     }
   },
   methods: {
@@ -69,6 +67,7 @@ export default {
           `,
         })
         console.log('results',results.data.procedures.list)
+        return results.data.procedures.list
       } catch (err) {
         console.warn(err)
         console.log(results)
