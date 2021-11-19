@@ -166,6 +166,7 @@ Vue.component('search-results', () => import(/* webpackPrefetch: true, webpackCh
 Vue.component('social-sharing', () => import(/* webpackPrefetch: true, webpackChunkName: "ui-extra" */ './components/common/social-sharing.vue'))
 
 Vue.component('checklist', () => import(/* webpackPrefetch: true, webpackChunkName: "ui-extra" */ './components/checklist/checklist.vue'))
+Vue.component('procedure', () => import(/* webpackPrefetch: true, webpackChunkName: "ui-extra" */ './components/checklist/procedure.vue'))
 
 
 Vue.component('tags', () => import(/* webpackChunkName: "tags" */ './components/tags.vue'))

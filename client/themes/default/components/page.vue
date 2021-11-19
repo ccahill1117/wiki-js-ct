@@ -192,7 +192,7 @@
 
 
           //- content and comments
-          v-flex.page-col-content(xs12, lg9, xl10)
+          v-flex.page-col-content(xs12, lg9, xl6)
             v-tooltip(:right='$vuetify.rtl', :left='!$vuetify.rtl', v-if='hasAnyPagePermissions')
               template(v-slot:activator='{ on: onEditActivator }')
                 v-speed-dial(
@@ -300,6 +300,11 @@
                 span {{$t('common:comments.title')}}
               .comments-main
                 slot(name='comments')
+
+          //- right side col
+          v-flex.page-col-content(xs6, lg5, xl3)
+            procedure
+
     nav-footer
     notify
     search-results

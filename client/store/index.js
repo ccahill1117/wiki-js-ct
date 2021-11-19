@@ -34,7 +34,8 @@ export default new Vuex.Store({
   ],
   state,
   getters: {
-    isLoading: state => { return state.loadingStack.length > 0 }
+    isLoading: state => { return state.loadingStack.length > 0 },
+    getProcedureState: state => state.procedure
   },
   mutations: {
     ...make.mutations(state),

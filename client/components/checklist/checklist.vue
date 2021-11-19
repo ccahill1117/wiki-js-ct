@@ -1,13 +1,11 @@
 <template>
   <div class="checklist-container">
-    <div>Procedures in Flight</div>
+    <div>Procedure Options</div>
     <v-btn @click='fetchProcedures()'>FetchProcedures</v-btn>
 
     <v-btn @click='startProcedure()'>Start Procedure</v-btn>
 
     <v-btn @click='check()'>checker</v-btn>
-
-
 
   </div>
 </template>
@@ -35,7 +33,7 @@ export default {
   },
   methods: {
     async check() {
-      console.log(this.$store.get('procedure'))
+      console.log(this.$store.state.procedure)
     },
 
 
@@ -69,7 +67,6 @@ export default {
               }
             }
           `,
-
         })
         console.log('results',results.data.procedures.list)
       } catch (err) {
@@ -93,35 +90,16 @@ export default {
 
 
   mounted () {
-    /**
-     * Center the popup on dual screens
-     * http://stackoverflow.com/questions/4068373/center-a-popup-window-on-screen/32261263
-     */
-    const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left
-    const dualScreenTop = window.screenTop !== undefined ? window.screenTop : screen.top
 
-    const width = window.innerWidth ? window.innerWidth : (document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width)
-    const height = window.innerHeight ? window.innerHeight : (document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height)
-
-    this.left = ((width / 2) - (this.width / 2)) + dualScreenLeft
-    this.top = ((height / 2) - (this.height / 2)) + dualScreenTop
   },
+  // graph ql
   apollo: {
     procedures: {
       query: listProceduresQuery,
       variables() {
         return {
-          // folderId: this.currentFolderId,
-          kind: 'ALL'
         }
       },
-      throttle: 1000,
-      fetchPolicy: 'network-only',
-      update: (data) => data.procedures,
-      watchLoading (isLoading) {
-        this.loading = isLoading
-        this.$store.commit(`loading${isLoading ? 'Start' : 'Stop'}`, 'editor-media-list-refresh')
-      }
     }
   }
 }
