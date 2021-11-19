@@ -6,53 +6,34 @@
 </template>
 
 <script>
+import { get, sync } from 'vuex-pathify'
+
 
 export default {
+  computed: {
+    userEmail: get('user/email'),
+    userId: get('user/id')
+
+  },
   props: {
-    url: {
-      type: String,
-      default: window.location.url
-    },
-    title: {
-      type: String,
-      default: 'Untitled Page'
-    },
-    description: {
-      type: String,
-      default: ''
-    }
+
   },
   data () {
     return {
-      width: 626,
-      height: 436,
-      left: 0,
-      top: 0
+
     }
   },
   methods: {
     checker() {
-      console.log('ok')
+      console.log('id', this.userId)
+      console.log('email', this.userEmail)
+      console.log('process')
+
     }
 
   },
   mounted () {
 
-
-    clip.on('success', () => {
-      this.$store.commit('showNotification', {
-        style: 'success',
-        message: `URL copied successfully`,
-        icon: 'content-copy'
-      })
-    })
-    clip.on('error', () => {
-      this.$store.commit('showNotification', {
-        style: 'red',
-        message: `Failed to copy to clipboard`,
-        icon: 'alert'
-      })
-    })
 
     /**
      * Center the popup on dual screens
