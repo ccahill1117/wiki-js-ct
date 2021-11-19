@@ -18,10 +18,18 @@ module.exports = {
       return procedures
     },
 
+    async listAll (obj, args, context) {
+
+      const procedures = await WIKI.models.procedures.query()
+
+      const comments = await WIKI.models.comments.query().where('pageId', page.id)
+
+    },
+
   },
   ProcedureMutation: {
     /**
-     * Create New Asset Folder
+     * Create New Procedure
      */
     async createProcedure(obj, args, context) {
       try {

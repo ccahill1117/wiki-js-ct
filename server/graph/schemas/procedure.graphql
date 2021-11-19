@@ -17,6 +17,8 @@ extend type Mutation {
 type ProcedureQuery {
   list: [ProcedureListItem]! @auth(requires: ["read:comments", "manage:system"]),
 
+  listAll: [ProcedureListItem]! @auth(requires: ["read:comments", "manage:system"]),
+
   listByPageId(
     locale: String!
     path: String!
@@ -49,8 +51,7 @@ type ProcedureListItem {
   pageId: Int
   createdAt: Date
   updatedAt: Date
+
 }
 
-enum ProcedureKind {
-  ALL
-}
+

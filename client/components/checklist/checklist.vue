@@ -1,7 +1,13 @@
 <template>
-  <div>
+  <div class="checklist-container">
     <div>Procedures in Flight</div>
-    <v-btn @click='fetchProcedures()'>ok</v-btn>
+    <v-btn @click='fetchProcedures()'>FetchProcedures</v-btn>
+
+    <v-btn @click='startProcedure()'>Start Procedure</v-btn>
+
+    <v-btn @click='check()'>checker</v-btn>
+
+
 
   </div>
 </template>
@@ -15,7 +21,8 @@ import gql from 'graphql-tag'
 export default {
   computed: {
     userEmail: get('user/email'),
-    userId: get('user/id')
+    userId: get('user/id'),
+    page: get('page')
 
   },
   props: {
@@ -24,36 +31,37 @@ export default {
   data () {
     return {
       procedures: ''
-
     }
   },
   methods: {
-    async createProcedure() {
-      console.log('id', this.userId)
-      console.log('store', this.$store)
-      console.log('process')
+    async check() {
+      console.log(this.$store.get('procedure'))
     },
-    async FetchProcedureHTTPS() {
-      axios.post("http://localhost:3030/procedures")
-        .then(response => console.log(response));
+
+    async startProcedure() {
+      let content = document.querySelector(".contents")
+      console.log(content)
+      let options = {}
+      options.content = content
+      options.isActive = false
+      this.$store.commit(`updateProcedure`, options)
     },
 
     async fetchProcedures() {
-      this.$store.commit(`loadingStart`, 'comments-edit')
-      this.isBusy = true
       try {
         const results = await this.$apollo.query({
           query: gql`
             query {
               procedures {
                 list {
+                  id
                   filename
                   pageId
                 }
               }
             }
           `,
-          fetchPolicy: 'network-only'
+
         })
         console.log('results',results.data.procedures.list)
       } catch (err) {
@@ -110,3 +118,11 @@ export default {
   }
 }
 </script>
+
+<style lang='scss'>
+
+.checklist-container {
+  padding: 15px;
+}
+
+</style>
