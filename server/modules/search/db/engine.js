@@ -21,6 +21,7 @@ module.exports = {
    */
   async query(q, opts) {
     const results = await WIKI.models.pages.query()
+      // below added for full body text searching
       .column('pages.id', 'title', 'description', 'path', 'content', 'localeCode as locale')
       .withGraphJoined('tags') // Adding page tags since they can be used to check resource access permissions
       .modifyGraph('tags', builder => {
