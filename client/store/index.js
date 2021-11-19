@@ -20,9 +20,10 @@ const state = {
     icon: 'cached',
     isActive: false
   },
+  // ctc
   procedure: {
     content: '',
-    isActive: false
+    isActive: false,
   }
 }
 
@@ -37,6 +38,7 @@ export default new Vuex.Store({
   },
   mutations: {
     ...make.mutations(state),
+    // ctc
     updateProcedure (st, opts) {
       st.procedure = _.defaults(opts, {
         content: opts.content,

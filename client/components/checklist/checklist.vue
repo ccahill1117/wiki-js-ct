@@ -38,13 +38,21 @@ export default {
       console.log(this.$store.get('procedure'))
     },
 
+
     async startProcedure() {
-      let content = document.querySelector(".contents")
-      console.log(content)
+      let content = this.parser()
       let options = {}
       options.content = content
-      options.isActive = false
+      options.isActive = true
       this.$store.commit(`updateProcedure`, options)
+    },
+
+    parser(content) {
+      let collection = (document.getElementsByClassName("checklist"))
+      let array = [...collection]
+      let returnArray = []
+      array.map(elm => returnArray.push(elm.innerHTML))
+      return returnArray
     },
 
     async fetchProcedures() {
