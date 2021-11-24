@@ -302,7 +302,7 @@
                 slot(name='comments')
 
           //- right side col
-          v-flex.page-col-content(xs6, lg5, xl3)
+          v-flex.page-col-content(xs6, lg5, xl4)
             procedure
 
     nav-footer
