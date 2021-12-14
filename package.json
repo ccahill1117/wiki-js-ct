@@ -6,7 +6,7 @@
   "main": "wiki.js",
   "dev": true,
   "scripts": {
-    "start": "node server --openssl-legacy-provider",
+    "start": "node server",
     "dev": "node dev",
     "build": "webpack --profile --config dev/webpack/webpack.prod.js",
     "watch": "webpack --config dev/webpack/webpack.dev.js",
