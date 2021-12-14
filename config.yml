@@ -28,7 +28,7 @@ db:
   port: 5432
   user: ''
   pass: ''
-  db: ct_workinstruction
+  db: process.env.DB_NAME
   ssl: false
 
   # Optional - PostgreSQL / MySQL / MariaDB only:
