@@ -10,6 +10,7 @@ const chalk = require('chalk')
 
 const init = {
   dev() {
+    const dot = require('dotenv').config()
     const webpack = require('webpack')
     const chokidar = require('chokidar')
 

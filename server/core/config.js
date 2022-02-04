@@ -62,7 +62,8 @@ module.exports = {
     if (process.env.DB_PASS_FILE) {
       console.info(chalk.blue(`DB_PASS_FILE is defined. Will use secret from file.`))
       try {
-        appconfig.db.pass = fs.readFileSync(process.env.DB_PASS_FILE, 'utf8').trim()
+        // appconfig.db.pass = fs.readFileSync(process.env.DB_PASS_FILE, 'utf8').trim()
+        appconfig.db.pass = process.env.DB_PASS_FILE
       } catch (err) {
         console.error(chalk.red.bold(`>>> Failed to read Docker Secret File using path defined in DB_PASS_FILE env variable!`))
         console.error(err.message)
